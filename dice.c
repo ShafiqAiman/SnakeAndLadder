@@ -12,6 +12,7 @@ int main()
         a=rand()%6+1;
         printf("%d\n",a);
     }
+    printf("hello");
 
     return 0;
 }
