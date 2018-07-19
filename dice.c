@@ -11,7 +11,6 @@ int main()
     for (counter=0;counter<100;counter++){
         a=rand()%6+1;
         printf("%d\n",a);
-        printf("Hello");
     }
 
     return 0;
