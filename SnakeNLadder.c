@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <windows.h>
 
 int main()
 {
@@ -42,6 +43,7 @@ char array[21][51]=
         }
         printf("Please enter your dice : ");
         scanf("%d",&dice);
+        system("cls");
         array[19][x]=' ';
         dice*=5;
         x+=dice;
