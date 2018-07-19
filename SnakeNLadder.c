@@ -4,7 +4,7 @@
 
 int main()
 {
-int counter,counter1,dice,a,x=-4,o=0,y=0;
+int counter,counter1,dice,a,x=-4,o=0,y=0,column=19;
 char array[21][51]=
     //0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35  36  37  38  39  40  41  42  43  44  45  46  47  48  49  50
     {'_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_',//0
@@ -43,11 +43,11 @@ char array[21][51]=
         }
         printf("Please enter your dice : ");
         scanf("%d",&dice);
-        system("cls");
-        array[19][x]=' ';
-        dice*=5;
-        x+=dice;
-        array[19][x]='X';
+        system("cls");//clear the screen once dice rotation is done
+        array[column][x]=' ';//reset the previous position of X chess
+        dice*=5;// times 5 because X chess need to move 5 places to reach next number
+        x+=dice;//x is final position of X chess after dice rotation
+        array[column][x]='X';//Mark the final position of X chess
         }
 
 
