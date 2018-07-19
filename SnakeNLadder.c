@@ -3,7 +3,7 @@
 
 int main()
 {
-int counter,counter1;
+int counter,counter1,dice,a,x=-4,o=0,y=0;
 char array[21][51]=
     //0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35  36  37  38  39  40  41  42  43  44  45  46  47  48  49  50
     {'_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_',//0
@@ -30,14 +30,21 @@ char array[21][51]=
      };
 
 
-        for (counter=0;counter<21;counter++){
+        for (a=0;a>=0;a++){
+        for (counter=0;counter<=20;counter++){
 
-        for (counter1=0;counter1<51;counter1++){
+            for (counter1=0;counter1<=50;counter1++){
 
-            printf("%c",array[counter][counter1]);
-        }
+                printf("%c",array[counter][counter1]);
+            }
             printf("\n");
 
+        }
+        printf("Please enter your dice : ");
+        scanf("%d",&dice);
+        dice*=5;
+        x+=dice;
+        array[19][x]='X';
         }
 
 
