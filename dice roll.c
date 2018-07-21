@@ -4,10 +4,10 @@
 
 int main()
 {
-    int r;
+    int dice;
 
     srand(time(NULL));
-    r=rand() % 6;
-    printf("dice : %d",r+1);
+    dice=rand() % 6;
+    printf("dice : %d",dice+1);
     return 0;
 }
