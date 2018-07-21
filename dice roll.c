@@ -6,8 +6,10 @@ int main()
 {
     int dice;
 
+    printf("\nPlease press enter to roll\n\n");
     srand(time(NULL));
-    dice=rand() % 6;
-    printf("dice : %d",dice+1);
+    dice = toupper( getche() );
+    dice=((rand()%6)+1);
+    printf("dice : %d",dice);
     return 0;
 }

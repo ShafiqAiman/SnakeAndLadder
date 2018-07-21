@@ -38,10 +38,11 @@ char array[21][51]=
         displayBoard(array);
 
         while (game){
-        printf("Please enter your dice : ");
-        scanf("%d",&dice);
+        printf("\nPlease press enter to roll\n\n");
+        srand(time(NULL));
+        dice = toupper( getche() );
+        dice=((rand()%6)+1);
         system("cls");
-
         PlayerXMovement(array,dice);
 
         }
@@ -72,9 +73,8 @@ void PlayerXMovement(char array[21][51], int dice)
             a=x;
             a+=5;
 
-
+    printf("\ndice : %d\n",dice);
     for (counter=0;counter<=20;counter++){
-
 
             for (counter1=0;counter1<=50;counter1++){
                     if ((counter==19)&&(counter1==x)){
