@@ -1,10 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <windows.h>
+#include <time.h>
+int x=1;
 
+void displayBoard(char array[21][51]);
+void PlayerXMovement(char array[21][51], int dice);
 int main()
 {
-int counter,counter1,dice,a,x=-4,o=0,y=0,column=19;
+int counter,counter1,dice,a,x=1,o=0,y=1,column=19,game=1,counter2;
 char array[21][51]=
     //0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35  36  37  38  39  40  41  42  43  44  45  46  47  48  49  50
     {'_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_',//0
@@ -26,13 +30,29 @@ char array[21][51]=
      '_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_',//16
      '|',' ','1',' ',' ','|',' ',' ','2',' ','|',' ',' ','3',' ','|',' ',' ','4',' ','|',' ',' ','5',' ','|',' ',' ','6',' ','|',' ',' ','7',' ','|',' ',' ','8',' ','|',' ',' ','9',' ','|',' ','1','0',' ','|',//17
      '|',' ',' ',' ',' ','|',' ',' ',' ',' ','|',' ',' ',' ',' ','|',' ',' ',' ',' ','|',' ',' ',' ',' ','|',' ',' ',' ',' ','|',' ',' ',' ',' ','|',' ',' ',' ',' ','|',' ',' ',' ',' ','|',' ',' ',' ',' ','|',//18
-     '|',' ',' ',' ',' ','|',' ',' ',' ',' ','|',' ',' ',' ',' ','|',' ',' ',' ',' ','|',' ',' ',' ',' ','|',' ',' ',' ',' ','|',' ',' ',' ',' ','|',' ',' ',' ',' ','|',' ',' ',' ',' ','|',' ',' ',' ',' ','|',//19
+     '|','X','O','Y',' ','|',' ',' ',' ',' ','|',' ',' ',' ',' ','|',' ',' ',' ',' ','|',' ',' ',' ',' ','|',' ',' ',' ',' ','|',' ',' ',' ',' ','|',' ',' ',' ',' ','|',' ',' ',' ',' ','|',' ',' ',' ',' ','|',//19
      '_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_' //20
      };
 
 
-        for (a=0;a>=0;a++){
-        for (counter=0;counter<=20;counter++){
+        displayBoard(array);
+
+        while (game){
+        printf("Please enter your dice : ");
+        scanf("%d",&dice);
+        system("cls");
+
+        PlayerXMovement(array,dice);
+
+        }
+        return 0;
+}
+
+
+void displayBoard(char array[21][51])
+{
+    int counter,counter1;
+    for (counter=0;counter<=20;counter++){
 
             for (counter1=0;counter1<=50;counter1++){
 
@@ -41,15 +61,42 @@ char array[21][51]=
             printf("\n");
 
         }
-        printf("Please enter your dice : ");
-        scanf("%d",&dice);
-        system("cls");//clear the screen once dice rotation is done
-        array[column][x]=' ';//reset the previous position of X chess
-        dice*=5;// times 5 because X chess need to move 5 places to reach next number
-        x+=dice;//x is final position of X chess after dice rotation
-        array[column][x]='X';//Mark the final position of X chess
-        }
 
-
-    return 0;
 }
+
+void PlayerXMovement(char array[21][51], int dice)
+{
+    int counter,counter1,counter2,a;
+
+    for (counter2=1;counter2<=dice;counter2++){
+            a=x;
+            a+=5;
+
+
+    for (counter=0;counter<=20;counter++){
+
+
+            for (counter1=0;counter1<=50;counter1++){
+                    if ((counter==19)&&(counter1==x)){
+                        array[counter][x]=' ';
+                    }
+                    if ((counter==19)&&(counter1==a)){
+                        array[counter][a]='X';
+                    }
+
+                printf("%c",array[counter][counter1]);
+            }//small loop end
+
+
+
+            printf("\n");
+            }//mid loop end
+            if (counter2<dice){
+            Sleep(300);
+            system("cls");
+            }
+            x+=5;
+            }//big loop end
+
+}
+
