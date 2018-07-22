@@ -2,13 +2,13 @@
 #include <stdlib.h>
 #include <windows.h>
 #include <time.h>
-int x=1;
+int x=1,a,row=1;
 
 void displayBoard(char array[21][51]);
 void PlayerXMovement(char array[21][51], int dice);
 int main()
 {
-int counter,counter1,dice,a,x=1,o=0,y=1,column=19,game=1,counter2;
+int dice,game=1;
 char array[21][51]=
     //0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35  36  37  38  39  40  41  42  43  44  45  46  47  48  49  50
     {'_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_',//0
@@ -34,7 +34,7 @@ char array[21][51]=
      '_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_' //20
      };
 
-
+        printf("\ndice:\n");
         displayBoard(array);
 
         while (game){
@@ -67,15 +67,23 @@ void displayBoard(char array[21][51])
 
 void PlayerXMovement(char array[21][51], int dice)
 {
-    int counter,counter1,counter2,a;
+    int counter,counter1,counter2;
 
     for (counter2=1;counter2<=dice;counter2++){
+        if (row==1){
             a=x;
             a+=5;
+            }else if ((row==2)||(row==4)){
+            a-=5;
+            }else if (row==3){
+            a+=5;
+            }
+
+
 
     printf("\ndice : %d\n",dice);
+    if (row==1){
     for (counter=0;counter<=20;counter++){
-
             for (counter1=0;counter1<=50;counter1++){
                     if ((counter==19)&&(counter1==x)){
                         array[counter][x]=' ';
@@ -85,18 +93,73 @@ void PlayerXMovement(char array[21][51], int dice)
                     }
 
                 printf("%c",array[counter][counter1]);
+                if (array[19][46]=='X'){
+                row=2;
+                }
             }//small loop end
 
-
-
             printf("\n");
+
             }//mid loop end
+
             if (counter2<dice){
             Sleep(300);
             system("cls");
             }
+
+
+
+        }/*row 1*/if ((row!=4)&&(x==41)&&(a==46)){continue;}
+
+        if (row==2){
+
+             for (counter=0;counter<=20;counter++){
+            for (counter1=0;counter1<=50;counter1++){
+
+                    if ((counter==15)&&(counter1==x)){
+                        if (array[19][46]=='X'){
+                        array[19][46]=' ';
+                        x+=5;
+                        a=x;
+                        }else if(array[15][46]=='X'){
+                            array[15][46]=' ';
+                            x=46;
+                            a=x-5;
+                        }else{
+                            array[counter][x]=' ';
+                            }
+                    }
+
+                    if ((counter==15)&&(counter1==a)){
+                        array[counter][a]='X';
+                    }
+
+                printf("%c",array[counter][counter1]);
+                if (array[15][1]=='X'){
+                row=3;
+                }
+            }//small loop end
+
+            printf("\n");
+
+            }//mid loop end
+            if (counter2<dice){
+            Sleep(300);
+            system("cls");
+
+            }
+        }/*row 2*/if ((x==6)&&(a==1)){continue;}
+
+        if ((row==1)||(row==3)){
             x+=5;
+            }else if ((row==2)||(row==4)){
+             x-=5;
+             }
+
+
             }//big loop end
 
+
 }
+
 
