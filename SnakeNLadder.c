@@ -38,7 +38,7 @@ char array[21][71]=
 
         displayBoard(array);
         while (game){
-        printf("\nPlease press enter to roll\n\n");
+        printf("\nPLAYER X :Please press enter to roll\n\n");
         srand(time(NULL));
         dice = toupper( getche() );
         dice=((rand()%6)+1);
@@ -382,7 +382,7 @@ void PlayerOMovement(char array[21][71], int dice,int *o, int *Row1){
             for (counter1=0;counter1<=70;counter1++){
                 if (array[7][b]=='O'){
                     array[7][b]=' ';
-                    *o=a;
+                    *o=b;
                 }else{
                     array[3][b]=' ';
                 }
