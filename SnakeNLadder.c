@@ -34,20 +34,22 @@ char array[21][71]=
      {'|','X',' ','O',' ','Y',' ','|',' ',' ',' ',' ',' ',' ','|',' ',' ',' ',' ',' ',' ','|',' ',' ',' ',' ',' ',' ','|',' ',' ',' ',' ',' ',' ','|',' ',' ',' ',' ',' ',' ','|',' ',' ',' ',' ',' ',' ','|',' ',' ',' ',' ',' ',' ','|',' ',' ',' ',' ',' ',' ','|',' ',' ',' ',' ',' ',' ','|'},//19
      {'_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_','_'},//20
      };
-        printf("\ndice:\n");
-        displayBoard(array);
 
+        displayBoard(array);
         while (game){
         printf("\nPlease press enter to roll\n\n");
         srand(time(NULL));
         dice = toupper( getche() );
         dice=((rand()%6)+1);
         system("cls");
-        PlayerXMovement(array,dice,&x,&row1);
+        PlayerXMovement(array, dice, &x, &row1);
+        if (array[3][64]=='X'){
+            break;
         }
-        return 0;
-}
+        }
 
+         return 0;
+}
 
 void displayBoard(char array[21][71])
 {
@@ -64,220 +66,183 @@ void displayBoard(char array[21][71])
 
 }
 
-void PlayerXMovement(char array[21][71], int dice, int *x, int *row)
-{
+void PlayerXMovement(char array[21][71], int dice,int *x, int *row1){
     int counter,counter1,counter2;
 
-    for (counter2=1;counter2<=dice;counter2++){
-        if (*row==1){
+    for (counter2=dice;counter2>0;counter2--){
+             printf("\nPlayer X dice  : %d\n",dice);
+            if ((*row1==1)||(*row1==3)||(*row1==5)){
             a=*x;
-            a+=7;
-            }else if ((*row==2)||(*row==4)){
-            a-=7;
-            }else if ((*row==3)||(*row==5)){
-            a+=7;
-            }
-
-
-
-    printf("\ndice : %d\n",dice);
-    if (*row==1){
-    for (counter=0;counter<=20;counter++){
-            for (counter1=0;counter1<=70;counter1++){
-                    if ((counter==19)&&(counter1==*x)){
-                        array[counter][*x]=' ';
-                    }
-                    if ((counter==19)&&(counter1==a)){
-                        array[counter][a]='X';
-                    }
-
-                printf("%c",array[counter][counter1]);
-                if (array[19][64]=='X'){
-                *row=2;
-                }
-            }//small loop end
-
-            printf("\n");
-
-            }//mid loop end
-
-            if (counter2<dice){
-            Sleep(300);
-            system("cls");
-            }
-            if ((*x==57)&&(a==64)){continue;}
-        }/*row 1*/
-
-        if (*row==2){
-
-             for (counter=0;counter<=20;counter++){
-            for (counter1=0;counter1<=70;counter1++){
-
-                    if ((counter==15)&&(counter1==*x)){
-                        if (array[19][64]=='X'){
-                        array[19][64]=' ';
-                        *x+=7;
-                        a=*x;
-                        }else if(array[15][64]=='X'){
-                            array[15][64]=' ';
-                            *x=64;
-                            a=*x-7;
-                        }else{
-                            array[counter][*x]=' ';
-                            }
-                    }
-
-
-                    if ((counter==15)&&(counter1==a)){
-                        array[counter][a]='X';
-                    }
-
-                printf("%c",array[counter][counter1]);
-                if (array[15][1]=='X'){
-                *row=3;
-                }
-            }//small loop end
-
-            printf("\n");
-
-            }//mid loop end
-            if (counter2<dice){
-            Sleep(300);
-            system("cls");
-            }
-            if ((*x==8)&&(a==1)){continue;}
-        }/*row 2*/
-
-        if (*row==3){
-
-             for (counter=0;counter<=20;counter++){
-            for (counter1=0;counter1<=70;counter1++){
-
-                    if ((counter==11)&&(counter1==*x)){
-                        if (array[15][1]=='X'){
-                        array[15][1]=' ';
-                        *x-=14;
-                        a=1;
-
-                        }else if(array[11][1]=='X'){
-                            array[11][1]=' ';
-                            *x=1;
-                            a=*x+7;
-                        }else{
-                            array[counter][*x]=' ';
-                            }
-
-                    }
-                     if ((counter==11)&&(counter1==a)){
-                        array[counter][a]='X';
-                    }
-
-                printf("%c",array[counter][counter1]);
-                if (array[11][64]=='X'){
-                *row=4;
-                }
-            }//small loop end
-
-            printf("\n");
-
-            }//mid loop end
-            if (counter2<dice){
-            Sleep(300);
-            system("cls");
-
-            }
-            if ((*x==57)&&(a==64)){continue;}
-        }/*row 3*/
-
-        if (*row==4){
-
-             for (counter=0;counter<=20;counter++){
-            for (counter1=0;counter1<=70;counter1++){
-
-                    if ((counter==7)&&(counter1==*x)){
-                        if (array[11][64]=='X'){
-                        array[11][64]=' ';
-                        *x+=7;
-                        a=*x;
-                        }else if(array[7][64]=='X'){
-                            array[7][64]=' ';
-                            *x=64;
-                            a=*x-7;
-                        }else{
-                            array[counter][*x]=' ';
-                            }
-                    }
-
-                    if ((counter==7)&&(counter1==a)){
-                        array[counter][a]='X';
-                    }
-
-                printf("%c",array[counter][counter1]);
-                if (array[7][1]=='X'){
-                *row=5;
-                }
-            }//small loop end
-
-            printf("\n");
-
-            }//mid loop end
-            if (counter2<dice){
-            Sleep(300);
-            system("cls");
-
-            }
-            if ((*x==8)&&(a==1)){continue;}
-
-        }/*row 4*/
-
-        if (*row==5){
-
-             for (counter=0;counter<=20;counter++){
-            for (counter1=0;counter1<=70;counter1++){
-
-                    if ((counter==3)&&(counter1==*x)){
-                        if (array[7][1]=='X'){
-                        array[7][1]=' ';
-                        *x-=14;
-                        a=1;
-                        }else if(array[3][1]=='X'){
-                            array[3][1]=' ';
-                            *x=1;
-                            a=*x+7;
-                        }else{
-                            array[counter][*x]=' ';
-                            }
-                    }
-                     if ((counter==3)&&(counter1==a)){
-                        array[counter][a]='X';
-                    }
-
-                printf("%c",array[counter][counter1]);
-                if (array[3][64]=='X'){
-                *row=6;
-                }
-            }//small loop end
-
-            printf("\n");
-
-            }//mid loop end
-            if (counter2<dice){
-            Sleep(300);
-            system("cls");
-
-            }
-            if ((*x==41)&&(a==46)){continue;}
-        }/*row 5*/
-
-
-        if ((*row==1)||(*row==3)||(*row==5)){
             *x+=7;
-            }else if ((*row==2)||(*row==4)){
-             *x-=7;
-             }
+            }else if ((*row1==2)||(*row1==4)||(*row1==6)){
+            a=*x;
+            *x-=7;
+            }
 
+        if (*row1==1){
+         for (counter=0;counter<=20;counter++){
 
-            }//big loop end
+            for (counter1=0;counter1<=70;counter1++){
+                    if ((counter==19)&&(counter1==a)){
+                        array[counter][a]=' ';
+                    }
+                    if ((counter==19)&&(counter1==*x)){
+                        array[counter][*x]='X';
+                    }
 
+                printf("%c",array[counter][counter1]);
+            }
+            printf("\n");
 
+        }
+        if (counter2>1){
+        Sleep(300);
+        system("cls");}
+
+        if (array[19][64]=='X'){
+            *row1=2;
+            continue;}
+        }//row=1
+
+        if (*row1==2){
+            for (counter=0;counter<=20;counter++){
+
+            for (counter1=0;counter1<=70;counter1++){
+                if (array[19][a]=='X'){
+                    array[19][a]=' ';
+                    *x=a;
+                }else{
+                    array[15][a]=' ';
+                    }
+
+                if ((counter==15)&&(counter1==*x)){
+                        array[counter][*x]='X';
+                    }
+
+               printf("%c",array[counter][counter1]);
+
+            }
+             printf("\n");
+            }
+             if (counter2>1){
+        Sleep(300);
+        system("cls");}
+
+        if (array[15][1]=='X'){
+            *row1=3;
+            continue;}
+        }//row1=2
+
+        if (*row1==3){
+            for (counter=0;counter<=20;counter++){
+
+            for (counter1=0;counter1<=70;counter1++){
+                if (array[15][a]=='X'){
+                    array[15][a]=' ';
+                    *x=a;
+                }else{
+                    array[11][a]=' ';
+                }
+
+                if ((counter==11)&&(counter1==*x)){
+                        array[counter][*x]='X';
+                    }
+                printf("%c",array[counter][counter1]);
+            }
+                printf("\n");
+            }
+            if (counter2>1){
+        Sleep(300);
+        system("cls");}
+
+        if (array[11][64]=='X'){
+            *row1=4;
+            continue;}
+        }//row1=3
+
+        if (*row1==4){
+            for (counter=0;counter<=20;counter++){
+
+            for (counter1=0;counter1<=70;counter1++){
+                if (array[11][a]=='X'){
+                    array[11][a]=' ';
+                    *x=a;
+                }else{
+                    array[7][a]=' ';
+                    }
+
+                if ((counter==7)&&(counter1==*x)){
+                        array[counter][*x]='X';
+                    }
+
+               printf("%c",array[counter][counter1]);
+
+            }
+             printf("\n");
+            }
+             if (counter2>1){
+        Sleep(300);
+        system("cls");}
+
+        if (array[7][1]=='X'){
+            *row1=5;
+            continue;}
+        }//row1=4
+
+        if (*row1==5){
+            for (counter=0;counter<=20;counter++){
+
+            for (counter1=0;counter1<=70;counter1++){
+                if (array[7][a]=='X'){
+                    array[7][a]=' ';
+                    *x=a;
+                }else{
+                    array[3][a]=' ';
+                }
+
+                if ((counter==3)&&(counter1==*x)){
+                        array[counter][*x]='X';
+                    }
+                printf("%c",array[counter][counter1]);
+            }
+                printf("\n");
+            }
+            if (counter2>1){
+        Sleep(300);
+        system("cls");}
+
+        if ((array[3][64]=='X')&&(counter2>1)){
+            *row1=6;
+            continue;
+            }else if (array[3][64]=='X'){
+            printf("Player X win !!");
+            }
+        }//row1=5
+
+        if (*row1==6){
+            for (counter=0;counter<=20;counter++){
+
+            for (counter1=0;counter1<=70;counter1++){
+                if ((counter==3)&&(counter1==a)){
+                        array[counter][a]=' ';
+                    }
+                if ((counter==3)&&(counter1==*x)){
+                        array[counter][*x]='X';
+                    }
+
+                printf("%c",array[counter][counter1]);
+            }
+            printf("\n");
+        }
+        if (counter2>1){
+        Sleep(300);
+        system("cls");}
+        if (counter2==1){
+            *row1=5;}
+        }//row1=6
+        }//dice
 }
+
+
+
+
