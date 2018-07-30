@@ -136,11 +136,12 @@ void PlayerXMovement(char array[21][71], int dice,int *x, int *row1){
                 if (array[19][a]=='X'){
                     array[19][a]=' ';
                     *x=a;
+                    a+=100;
                 }else{
                     array[15][a]=' ';
                     }
 
-                if ((counter==15)&&(counter1==*x)){
+                if ((counter==15)&&(counter1==(*x))){
                         array[counter][*x]='X';
                     }
 
@@ -149,6 +150,7 @@ void PlayerXMovement(char array[21][71], int dice,int *x, int *row1){
             }
              printf("\n");
             }
+
              if (counter2>1){
         Sleep(300);
         system("cls");}
@@ -165,6 +167,7 @@ void PlayerXMovement(char array[21][71], int dice,int *x, int *row1){
                 if (array[15][a]=='X'){
                     array[15][a]=' ';
                     *x=a;
+                    a-=100;
                 }else{
                     array[11][a]=' ';
                 }
@@ -176,6 +179,7 @@ void PlayerXMovement(char array[21][71], int dice,int *x, int *row1){
             }
                 printf("\n");
             }
+
             if (counter2>1){
         Sleep(300);
         system("cls");}
@@ -192,6 +196,7 @@ void PlayerXMovement(char array[21][71], int dice,int *x, int *row1){
                 if (array[11][a]=='X'){
                     array[11][a]=' ';
                     *x=a;
+                    a+=100;
                 }else{
                     array[7][a]=' ';
                     }
@@ -221,6 +226,7 @@ void PlayerXMovement(char array[21][71], int dice,int *x, int *row1){
                 if (array[7][a]=='X'){
                     array[7][a]=' ';
                     *x=a;
+                    a-=100;
                 }else{
                     array[3][a]=' ';
                 }
@@ -267,15 +273,16 @@ void PlayerXMovement(char array[21][71], int dice,int *x, int *row1){
         }//row1=6
         }//dice
 }
+
 void PlayerOMovement(char array[21][71], int dice,int *o, int *Row1){
     int counter,counter1,counter2;
 
-    for (counter2=dice;counter2>0;counter2--){//dice = 5
+    for (counter2=dice;counter2>0;counter2--){
              printf("\nPlayer O dice  : %d\n",dice);
-            if ((*Row1==1)||(*Row1==3)||(*Row1==5)){//if the chess is moving in these rows, they will move to the right
-            b=*o;//a=1
-            *o+=7;//x=8
-            }else if ((*Row1==2)||(*Row1==4)||(*Row1==6)){//if the chess is moving in these rows, they will move to the left.
+            if ((*Row1==1)||(*Row1==3)||(*Row1==5)){
+            b=*o;
+            *o+=7;
+            }else if ((*Row1==2)||(*Row1==4)||(*Row1==6)){
             b=*o;
             *o-=7;
             }
@@ -285,22 +292,22 @@ void PlayerOMovement(char array[21][71], int dice,int *o, int *Row1){
 
             for (counter1=0;counter1<=70;counter1++){
                     if ((counter==19)&&(counter1==b)){
-                        array[counter][b]=' ';//clear the previous position
+                        array[counter][b]=' ';
                     }
                     if ((counter==19)&&(counter1==*o)){
-                        array[counter][*o]='O';//mark the current X
+                        array[counter][*o]='O';
                     }
 
-                printf("%c",array[counter][counter1]);//print back the table since the previous table is deleted.
+                printf("%c",array[counter][counter1]);
             }
             printf("\n");
 
         }
-        if (counter2>1){//if the movement of dice finished. The program will ask the user back for dice rolling.
+        if (counter2>1){
         Sleep(300);
-        system("cls");}//the current table will be deleted.
+        system("cls");}
 
-        if (array[19][66]=='O'){//array[19][64] is position of 10. So once the chess is here, the row will be automatically set to row1=2
+        if (array[19][66]=='O'){
             *Row1=2;
             continue;}
         }//row=1
@@ -310,26 +317,28 @@ void PlayerOMovement(char array[21][71], int dice,int *o, int *Row1){
 
             for (counter1=0;counter1<=70;counter1++){
                 if (array[19][b]=='O'){
-                    array[19][b]=' ';//deleting back X in previous position which is position 10. eg=array[19][64]
-                    *o=b;//x=64
+                    array[19][b]=' ';
+                    *o=b;
+                    b+=100;
                 }else{
-                    array[15][b]=' ';//eg=until array[15][64],chess x will be deleted.
+                    array[15][b]=' ';
                     }
 
-                if ((counter==15)&&(counter1==*o)){//eg=at counter ==15 and counter1==64
-                        array[counter][*o]='O';//new position of chess X marked.
+                if ((counter==15)&&(counter1==*o)){
+                        array[counter][*o]='O';
                     }
 
                printf("%c",array[counter][counter1]);
 
             }
-             printf("\n");//new line
+             printf("\n");
             }
-             if (counter2>1){//if the movement of dice finished. The program will ask the user back for dice rolling.
-        Sleep(300);
-        system("cls");}//the current table will be deleted.
 
-        if (array[15][3]=='O'){//array[15][1] is position of 10. So once the chess is here, the row will be automatically set to row1=3
+             if (counter2>1){
+        Sleep(300);
+        system("cls");}
+
+        if (array[15][3]=='O'){
             *Row1=3;
             continue;}
         }//row1=2
@@ -341,6 +350,7 @@ void PlayerOMovement(char array[21][71], int dice,int *o, int *Row1){
                 if (array[15][b]=='O'){
                     array[15][b]=' ';
                     *o=b;
+                    b-=100;
                 }else{
                     array[11][b]=' ';
                 }
@@ -368,6 +378,7 @@ void PlayerOMovement(char array[21][71], int dice,int *o, int *Row1){
                 if (array[11][b]=='O'){
                     array[11][b]=' ';
                     *o=b;
+                    b+=100;
                 }else{
                     array[7][b]=' ';
                     }
@@ -397,6 +408,7 @@ void PlayerOMovement(char array[21][71], int dice,int *o, int *Row1){
                 if (array[7][b]=='O'){
                     array[7][b]=' ';
                     *o=b;
+                    b-=100;
                 }else{
                     array[3][b]=' ';
                 }
@@ -489,6 +501,7 @@ void PlayerYMovement(char array[21][71], int dice,int *y, int *row){
                 if (array[19][c]=='Y'){
                     array[19][c]=' ';
                     *y=c;
+                    c+=100;
                 }else{
                     array[15][c]=' ';
                     }
@@ -518,6 +531,7 @@ void PlayerYMovement(char array[21][71], int dice,int *y, int *row){
                 if (array[15][c]=='Y'){
                     array[15][c]=' ';
                     *y=c;
+                    c-=100;
                 }else{
                     array[11][c]=' ';
                 }
@@ -545,6 +559,7 @@ void PlayerYMovement(char array[21][71], int dice,int *y, int *row){
                 if (array[11][c]=='Y'){
                     array[11][c]=' ';
                     *y=c;
+                    c+=100;
                 }else{
                     array[7][c]=' ';
                     }
@@ -574,6 +589,7 @@ void PlayerYMovement(char array[21][71], int dice,int *y, int *row){
                 if (array[7][c]=='Y'){
                     array[7][c]=' ';
                     *y=c;
+                    c-=100;
                 }else{
                     array[3][c]=' ';
                 }
@@ -620,7 +636,6 @@ void PlayerYMovement(char array[21][71], int dice,int *y, int *row){
         }//row=6
         }//dice
 }
-
 
 int singleplayer()
 {
