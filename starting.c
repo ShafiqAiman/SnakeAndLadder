@@ -662,6 +662,7 @@ int singleplayer()
         PlayerXMovement(array, dice, &x, &row1);
         if (array[3][64]=='X'){
             Sleep(3000);
+            loader();
             break;
 
         }
@@ -672,6 +673,7 @@ int singleplayer()
         PlayerOMovement(array, dice, &o, &Row1);
         if (array[3][66]=='O'){
             Sleep(3000);
+            loader();
             break;
 
         }
@@ -720,6 +722,7 @@ int multiplayer()
         PlayerXMovement(array, dice, &x, &row1);
         if (array[3][64]=='X'){
             Sleep(3000);
+            loader();
             break;
         }
         printf("\nPlayer O Please press enter to roll\n\n");
@@ -729,6 +732,7 @@ int multiplayer()
         PlayerOMovement(array, dice, &o, &Row1);
         if (array[3][66]=='O'){
             Sleep(3000);
+            loader();
             break;
         }
         printf("\nPlayer Y Please press enter to roll\n\n");
@@ -738,6 +742,7 @@ int multiplayer()
         PlayerYMovement(array, dice, &y, &row);
         if (array[3][68]=='Y'){
             Sleep(3000);
+            loader();
             break;
         }
         }
