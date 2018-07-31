@@ -3,7 +3,7 @@ Name     :1.
           2.Thing Wei Jen (B04180042)
           3.
           4.
-          5.
+          5. Aiman Syakirin Basri (B04180049)
 Title    :Group Assignment -- Snake And Ladder
 
 Lecturer :Sir Mohd Ridzuan Ahmad
@@ -13,15 +13,37 @@ Lecturer :Sir Mohd Ridzuan Ahmad
 #include <stdlib.h>
 #include <windows.h>
 #include <time.h>
+#include <dos.h>
 
+
+int music(int pitch, int time)
+    {
+
+        Beep( pitch, time);
+        return 0;
+    }
+
+void colors(int k) //interface text colors
+{
+    HANDLE hConsole; //acts a handle to an object
+    int color;
+    hConsole= GetStdHandle(STD_OUTPUT_HANDLE);
+    color=k;//
+    SetConsoleTextAttribute(hConsole,color); //Sets the foreground (text) and background color attributes of characters written to the console screen buffer.
+
+
+}
 void loader()//loading......
 {
-    int i;
+    int i,pitch=900;
     system("cls");
+    colors(15);
     printf("\n\n\n\t\tPlease wait loading...");
     printf("\n\n\n\t\t");
     for(i=0;i<14;i++)
-    {   Sleep(100);
+    {
+        music(pitch-=50,100);
+        Sleep(100);
         printf("¨");
     }
 }
@@ -30,6 +52,8 @@ void thanks()//ending interface
 {
     loader();
     system("cls");
+    colors(14);
+
     printf("\n\n");
     printf("\n\t*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*");
     printf("\n\t:                                                         :");
@@ -37,6 +61,9 @@ void thanks()//ending interface
     printf("\n\t:                                                         :");
     printf("\n\t*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*=*");
     printf("\n\n");
+    music(2500,400);
+    music(2000,300);
+    music(1500,200);
     return ;
 }
 
@@ -45,7 +72,8 @@ void quit()//quit option interface
     char c;
     do{
     system("cls");
-    printf("\n\n");
+    colors(12);
+    printf("\n\n\a");
     printf("\n\t?????????????????????????????????????????????????      ");
     printf("\n\t?                                               ?      ");
     printf("\n\t?    Are You Sure You Want to Quit the Game?    ?      ");
@@ -74,6 +102,12 @@ void quit()//quit option interface
 
 int firstscr()//starting interface
 {
+    int acolornum,pitch=0;
+
+    while (acolornum<15){
+    music(pitch+=50,150);
+    system("cls");
+    colors(++acolornum);
     printf("\n\n\n\t============================================================");
     printf("\n                  __                                              ");
     printf("\n                 `--)                                     |__|    ");
@@ -82,17 +116,23 @@ int firstscr()//starting interface
     printf("\n              8__/_ _                                     |__|    ");
     printf("\n                ( _ _ )                                   |  |    ");
     printf("\n\n\t============================================================");
+    Sleep(150);
+    }
     return 0;
 }
 
 void displayBoard(char array[21][71])//to display the original board by using 2d array, the board is located at singleplayer, twoplayer and multiplayer function
 {
+
+    colors(10); // board color
+
     int counter,counter1;
     for (counter=0;counter<=20;counter++){//counter is for row
-
+                music(375,175); //audio for board printing
             for (counter1=0;counter1<=70;counter1++){//counter1 is for column
 
                 printf("%c",array[counter][counter1]);
+
             }
             printf("\n");
 
@@ -116,7 +156,9 @@ Further explanation of player movement is at function PlayerXMovement.
 void PlayerXMovement(char array[21][71], int dice,int *x, int *row1,int *pause){//function for the movement of player X
     int counter,counter1,counter2,a;
 
+
     for (counter2=dice;counter2>0;counter2--){//counter2 is to know how many time the player will move by 1 step
+            music(1350,50);
             printf("\nPlayer X dice  : %d\n",dice);
             if ((*row1==1)||(*row1==3)||(*row1==5)){//the condition are separated into 2 parts starting from most bottom row of the board as row=1
             a=*x;//variable a is for printing space bar
@@ -136,7 +178,7 @@ void PlayerXMovement(char array[21][71], int dice,int *x, int *row1,int *pause){
                     if ((counter==19)&&(counter1==*x)){
                         array[counter][*x]='X';
                     }
-
+                colors(11);
                 printf("%c",array[counter][counter1]);
             }
             printf("\n");
@@ -363,8 +405,11 @@ The below part is for all the special commands in the snake and ladder game, inc
 void PlayerOMovement(char array[21][71], int dice,int *o, int *Row1, int *pause){
     int counter,counter1,counter2,b;
 
+
+
    for (counter2=dice;counter2>0;counter2--){
-             printf("\nPlayer O dice  : %d\n",dice);
+            music(7030,50);
+            printf("\nPlayer O dice  : %d\n",dice);
             if ((*Row1==1)||(*Row1==3)||(*Row1==5)){
             b=*o;
             *o+=7;
@@ -607,8 +652,10 @@ void PlayerOMovement(char array[21][71], int dice,int *o, int *Row1, int *pause)
 void PlayerYMovement(char array[21][71], int dice,int *y, int *row, int *pause){
     int counter,counter1,counter2,c;
 
+
     for (counter2=dice;counter2>0;counter2--){
-             printf("\nPlayer Y dice  : %d\n",dice);
+            music(3820,50);
+            printf("\nPlayer Y dice  : %d\n",dice);
             if ((*row==1)||(*row==3)||(*row==5)){
             c=*y;
             *y+=7;
@@ -885,6 +932,7 @@ int singleplayer()//function for single player mode
         if (pause1<=0){//to perform the pause instruction for player X
         printf("\nPLAYER X :Please press enter to roll\n\n");
         dice = toupper( getche() );
+        music(250,100);
         dice=((rand()%6)+1);//dice generator
         system("cls");
         PlayerXMovement(array, dice, &x, &row1,&pause1);//refer to the function
@@ -952,6 +1000,7 @@ int twoplayer()//2 players mode, the function is similar to single player
         if (pause1<=0){
         printf("\nPLAYER X :Please press enter to roll\n\n");
         dice = toupper( getche() );
+        music(250,100);
         dice=((rand()%6)+1);
         system("cls");
         PlayerXMovement(array, dice, &x, &row1,&pause1);
@@ -967,6 +1016,7 @@ int twoplayer()//2 players mode, the function is similar to single player
         if (pause2<=0){
         printf("\nPLAYER O :Please press enter to roll\n\n");
         dice = toupper( getche() );
+        music(250,100);
         dice=((rand()%6)+1);
         system("cls");
         PlayerOMovement(array, dice, &o, &Row1,&pause2);
@@ -1018,8 +1068,9 @@ int multiplayer()//3 players mode
         while (game){
         srand(time(NULL));
         if (pause1<=0){
-        printf("\nPlayer X Please press enter to roll\n\n");
+        printf("\nPlayer X: Please press enter to roll\n\n");
         dice = toupper( getche() );
+        music(250,100);
         dice=((rand()%6)+1);
         system("cls");
         PlayerXMovement(array, dice, &x, &row1,&pause1);
@@ -1032,8 +1083,9 @@ int multiplayer()//3 players mode
             pause1--;
         }
         if (pause2<=0){
-        printf("\nPlayer O Please press enter to roll\n\n");
+        printf("\nPlayer O: Please press enter to roll\n\n");
         dice = toupper( getche() );
+        music(250,100);
         dice=((rand()%6)+1);
         system("cls");
         PlayerOMovement(array, dice, &o, &Row1, &pause2);
@@ -1046,8 +1098,9 @@ int multiplayer()//3 players mode
             pause2--;
         }
         if (pause3<=0){
-        printf("\nPlayer Y Please press enter to roll\n\n");
+        printf("\nPlayer Y: Please press enter to roll\n\n");
         dice = toupper( getche() );
+        music(250,100);
         dice=((rand()%6)+1);
         system("cls");
         PlayerYMovement(array, dice, &y, &row, &pause3);
@@ -1066,13 +1119,17 @@ int multiplayer()//3 players mode
 
 void main()//main function
 {
+
     firstscr();//display starting interface
     printf("\n\n\n\n\t\t\t   Press any key to start !!");
     getch();//press any key
+    music(250,100);
 
     int input;
+
     do{
     system("cls");
+    colors(15);
     printf("\n\n\n\tGame mode: ");
     printf("\n\n\tPress 1 for Single-Player VS Computer Mode ");
     printf("\n\tPress 2 for Two-Player Mode");
@@ -1080,6 +1137,7 @@ void main()//main function
     printf("\n\tPress 4 to Exit");
     printf("\n\n\n\tEnter your choice : ");
     scanf("%d",&input);
+    music(250,100);
 
             switch(input){
             case 1 :singleplayer();break;
