@@ -1,8 +1,8 @@
 /*
-Name     :1.
+Name     :1.Muhammad Shafiq Aiman Bin Shahrul Nizam(B04180002)
           2.Thing Wei Jen (B04180042)
           3.
-          4.
+          4.Izzatul Nur Atiqah Binti Rosslan(B04180030)
           5. Aiman Syakirin Basri (B04180049)
 Title    :Group Assignment -- Snake And Ladder
 
