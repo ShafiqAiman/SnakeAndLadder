@@ -1,12 +1,12 @@
 /*
-Name   :1.
-        2.Thing Wei Jen (B04180042)
-        3.
-        4.
-        5.
-Title  :Group Assignment 1 -- Snake And Ladder
+Name     :1.
+          2.Thing Wei Jen (B04180042)
+          3.
+          4.
+          5.
+Title    :Group Assignment -- Snake And Ladder
 
-Lecturer:Sir Mohd Ridzuan Ahmad
+Lecturer :Sir Mohd Ridzuan Ahmad
 */
 
 #include <stdio.h>
@@ -14,7 +14,7 @@ Lecturer:Sir Mohd Ridzuan Ahmad
 #include <windows.h>
 #include <time.h>
 
-void loader()
+void loader()//loading......
 {
     int i;
     system("cls");
@@ -26,7 +26,7 @@ void loader()
     }
 }
 
-void thanks()
+void thanks()//ending interface
 {
     loader();
     system("cls");
@@ -40,7 +40,7 @@ void thanks()
     return ;
 }
 
-void quit()
+void quit()//quit option interface
 {
     char c;
     do{
@@ -72,7 +72,7 @@ void quit()
     return;
 }
 
-int firstscr()
+int firstscr()//starting interface
 {
     printf("\n\n\n\t============================================================");
     printf("\n                  __                                              ");
@@ -85,12 +85,12 @@ int firstscr()
     return 0;
 }
 
-void displayBoard(char array[21][71])
+void displayBoard(char array[21][71])//to display the original board by using 2d array, the board is located at singleplayer, twoplayer and multiplayer function
 {
     int counter,counter1;
-    for (counter=0;counter<=20;counter++){
+    for (counter=0;counter<=20;counter++){//counter is for row
 
-            for (counter1=0;counter1<=70;counter1++){
+            for (counter1=0;counter1<=70;counter1++){//counter1 is for column
 
                 printf("%c",array[counter][counter1]);
             }
@@ -99,17 +99,30 @@ void displayBoard(char array[21][71])
         }
 
 }
+/*
+For all the 3 players movement, same concept is applied into it and separated into 3 different function called PlayerXMovement, PlayerOMovement
+and PlayerYMovement. So the explanation is only on function PlayerXMovement.
 
-void PlayerXMovement(char array[21][71], int dice,int *x, int *row1,int *pause){
+For each player function, 2 variables are declared, one for assigning the player symbol into next place(x, o and y), and another variable to clear(print space bar)
+the previous location of the player symbol (a,b and c).
+
+Some algorithm (manipulating the coordinates of the player symbol and space bar in the 2D array) are applied to create the visual effect of the player movement.
+starting from row 2 up to row 5, the player need to move up, so the variable printing the player symbol will stay at same coordinate
+while variable printing space bar will be equal to a value that will not affect other spot (in this case such as '2'),
+then only the variable will be assigned back to the value it should be when the loop goes again.
+
+Further explanation of player movement is at function PlayerXMovement.
+*/
+void PlayerXMovement(char array[21][71], int dice,int *x, int *row1,int *pause){//function for the movement of player X
     int counter,counter1,counter2,a;
 
-    for (counter2=dice;counter2>0;counter2--){
-             printf("\nPlayer X dice  : %d\n",dice);
-            if ((*row1==1)||(*row1==3)||(*row1==5)){
-            a=*x;
-            *x+=7;
-            }else if ((*row1==2)||(*row1==4)||(*row1==6)){
-            a=*x;
+    for (counter2=dice;counter2>0;counter2--){//counter2 is to know how many time the player will move by 1 step
+            printf("\nPlayer X dice  : %d\n",dice);
+            if ((*row1==1)||(*row1==3)||(*row1==5)){//the condition are separated into 2 parts starting from most bottom row of the board as row=1
+            a=*x;//variable a is for printing space bar
+            *x+=7;//variable x is for printing player symbol
+            }else if ((*row1==2)||(*row1==4)||(*row1==6)){//variable x is for printing 'X', variable a is for printing space bar to cover the previous 'X'
+            a=*x;                                         //for row=6, its actually designed for the moving backward part when the player go exceeds 50
             *x-=7;
             }
 
@@ -133,7 +146,7 @@ void PlayerXMovement(char array[21][71], int dice,int *x, int *row1,int *pause){
         Sleep(300);
         system("cls");}
 
-        if (array[19][64]=='X'){
+        if (array[19][64]=='X'){//when the player reaches the edge of the board, it will ignore the instruction below and continue the looping for dice
             *row1=2;
             continue;}
         }//row=1
@@ -142,10 +155,10 @@ void PlayerXMovement(char array[21][71], int dice,int *x, int *row1,int *pause){
             for (counter=0;counter<=20;counter++){
 
             for (counter1=0;counter1<=70;counter1++){
-                if (array[19][a]=='X'){
+                if (array[19][a]=='X'){//this if statement is for the process when player reaches the edge of the board such as 10,20.
                     array[19][a]=' ';
                     *x=a;
-                    a=2;
+                    a=2;//variable that print space bar need to be assigned to a value that will not affect the board so that it will not overwrite the player symbol
                 }else{
                     array[15][a]=' ';
                     }
@@ -278,6 +291,9 @@ void PlayerXMovement(char array[21][71], int dice,int *x, int *row1,int *pause){
         if (counter2==1){
             *row1=5;}
         }//row1=6
+/*
+The below part is for all the special commands in the snake and ladder game, including go, reverse and pause
+*/
          if ((array[19][22]=='X')&&(counter2==1)){//go32
                 array[19][22]=' ';
                 counter2++;
@@ -832,7 +848,7 @@ void PlayerYMovement(char array[21][71], int dice,int *y, int *row, int *pause){
         }//dice
 }
 
-int singleplayer()
+int singleplayer()//function for single player mode
 {
     system("cls");
     int dice,game=1,x=1,o=3,row1=1,Row1=1,pause1=0,pause2=0;
@@ -864,24 +880,23 @@ int singleplayer()
 
         printf("\nPlayer X VS Player O (Computer)\n");
         displayBoard(array);
-        while (game){
+        while (game){//to keep the game looping until someone reached 50
         srand(time(NULL));
-        if (pause1<=0){
+        if (pause1<=0){//to perform the pause instruction for player X
         printf("\nPLAYER X :Please press enter to roll\n\n");
         dice = toupper( getche() );
-        dice=((rand()%6)+1);
+        dice=((rand()%6)+1);//dice generator
         system("cls");
-        PlayerXMovement(array, dice, &x, &row1,&pause1);
+        PlayerXMovement(array, dice, &x, &row1,&pause1);//refer to the function
         if (array[3][64]=='X'){
             Sleep(3000);
             loader();
-            break;
-
+            break;//to break out the "while game" loop and go back to main function
         }
         }else{
             pause1--;
         }
-        if (pause2<=0){
+        if (pause2<=0){//to perform the pause instruction for player O
         Sleep(800);
         dice=((rand()%6)+1);
         system("cls");
@@ -900,7 +915,7 @@ int singleplayer()
          return 0;
 }
 
-int twoplayer()
+int twoplayer()//2 players mode, the function is similar to single player
 {
     system("cls");
     int dice,game=1,x=1,o=3,row1=1,Row1=1,pause1=0,pause2=0;
@@ -969,7 +984,7 @@ int twoplayer()
          return 0;
 }
 
-int multiplayer()
+int multiplayer()//3 players mode
 {
     system("cls");
     int dice,game=1,x=1,row1=1,o=3,Row1=1,y=5,row=1,pause1=0,pause2=0,pause3=0;
@@ -1049,11 +1064,11 @@ int multiplayer()
          return 0;
 }
 
-void main()
+void main()//main function
 {
-    firstscr();
+    firstscr();//display starting interface
     printf("\n\n\n\n\t\t\t   Press any key to start !!");
-    getch();
+    getch();//press any key
 
     int input;
     do{
