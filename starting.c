@@ -3,9 +3,10 @@ Name     :1.Muhammad Shafiq Aiman Bin Shahrul Nizam(B04180002)
           2.Thing Wei Jen (B04180042)
           3.
           4.Izzatul Nur Atiqah Binti Rosslan(B04180030)
-          5. Aiman Syakirin Basri (B04180049)
+          5.Aiman Syakirin Basri (B04180049)
 Title    :Group Assignment -- Snake And Ladder
 
+Date     :1 August 2018
 Lecturer :Sir Mohd Ridzuan Ahmad
 */
 
@@ -64,7 +65,6 @@ void thanks()//ending interface
     music(2500,400);
     music(2000,300);
     music(1500,200);
-    return ;
 }
 
 void quit()//quit option interface
@@ -307,8 +307,6 @@ void PlayerXMovement(char array[21][71], int dice,int *x, int *row1,int *pause){
         if ((array[3][64]=='X')&&(counter2>1)){
             *row1=6;
             continue;
-            }else if (array[3][64]=='X'){
-            printf("Player X win !!\n\nLoading.....\nPlease wait 3 seconds");
             }
         }//row1=5
 
@@ -557,8 +555,6 @@ void PlayerOMovement(char array[21][71], int dice,int *o, int *Row1, int *pause)
         if ((array[3][66]=='O')&&(counter2>1)){
             *Row1=6;
             continue;
-            }else if (array[3][66]=='O'){
-             printf("Player O win !!\n\nLoading.....\nPlease wait 3 seconds");
             }
         }//row=5
 
@@ -803,8 +799,6 @@ void PlayerYMovement(char array[21][71], int dice,int *y, int *row, int *pause){
         if ((array[3][68]=='Y')&&(counter2>1)){
             *row=6;
             continue;
-            }else if (array[3][68]=='Y'){
-             printf("Player Y win !!\n\nLoading.....\nPlease wait 3 seconds");
             }
         }//row=5
 
@@ -898,7 +892,7 @@ void PlayerYMovement(char array[21][71], int dice,int *y, int *row, int *pause){
 int singleplayer()//function for single player mode
 {
     system("cls");
-    int dice,game=1,x=1,o=3,row1=1,Row1=1,pause1=0,pause2=0;
+    int dice,game=1,x=1,o=3,row1=1,Row1=1,pause1=0,pause2=0,choose;
     char array[21][71]=
      //0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35  36  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51  52  53  54  55  56  57  58  59  60  61  62  63  64  65  66  67  68  69  70
     {
@@ -925,46 +919,97 @@ int singleplayer()//function for single player mode
      {'-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-','-'}//20
      };
 
-        printf("\nPlayer X VS Player O (Computer)\n");
-        displayBoard(array);
-        while (game){//to keep the game looping until someone reached 50
-        srand(time(NULL));
-        if (pause1<=0){//to perform the pause instruction for player X
-        printf("\nPLAYER X :Please press enter to roll\n\n");
-        dice = toupper( getche() );
-        music(250,100);
-        dice=((rand()%6)+1);//dice generator
-        system("cls");
-        PlayerXMovement(array, dice, &x, &row1,&pause1);//refer to the function
-        if (array[3][64]=='X'){
-            Sleep(3000);
-            loader();
-            break;//to break out the "while game" loop and go back to main function
+        printf("\n\n\n\tPress 1 to let player starts first\n\tPress 2 to let computer starts first\n\n\tEnter Your Choice:");
+        scanf(" %d",&choose);
+        getchar();
+        switch (choose){//to determine who will start the game first
+        case 1: loader();
+                system("cls");
+                printf("Player X VS Computer (Player O)\nPlayer X starts first\n");
+                displayBoard(array);
+                while (game){//to keep the game looping until someone reached 50
+                srand(time(NULL));
+                if (pause1<=0){//to perform the pause instruction for player X
+                printf("\nPLAYER X :Please press enter to roll\n\n");
+                dice = toupper( getche() );
+                music(250,100);
+                dice=((rand()%6)+1);//dice generator
+                system("cls");
+                PlayerXMovement(array, dice, &x, &row1,&pause1);//refer to the function
+                if (array[3][64]=='X'){
+                    printf("\nYou Win!! CONGRATULATION!!\n\nLoading......\nPlease wait......");
+                    Sleep(3000);
+                    loader();
+                    break;//to break out the "while game" loop and go back to main function
+                }
+                }else{
+                    pause1--;
+                }
+                if (pause2<=0){//to perform the pause instruction for player O
+                Sleep(800);
+                dice=((rand()%6)+1);
+                system("cls");
+                PlayerOMovement(array, dice, &o, &Row1,&pause2);
+                if (array[3][66]=='O'){
+                    printf("\nYou Lose!! Better Luck Next Time!!\n\nLoading......\nPlease wait......");
+                    Sleep(3000);
+                    loader();
+                    break;
+                }
+                }else{
+                    pause2--;
+                }
+                }
+                break;
+        case 2: loader();
+                system("cls");
+                printf("Player X VS Computer (Player O)\nComputer starts first\n");
+                displayBoard(array);
+                while (game){//to keep the game looping until someone reached 50
+                srand(time(NULL));
+                if (pause2<=0){//to perform the pause instruction for player O
+                Sleep(800);
+                dice=((rand()%6)+1);
+                system("cls");
+                PlayerOMovement(array, dice, &o, &Row1,&pause2);
+                if (array[3][66]=='O'){
+                    printf("\nYou Lose!! Better Luck Next Time!!\n\nLoading......\nPlease wait......");
+                    Sleep(3000);
+                    loader();
+                    break;
+                }
+                }else{
+                    pause2--;
+                }
+                if (pause1<=0){//to perform the pause instruction for player X
+                printf("\nPLAYER X :Please press enter to roll\n\n");
+                dice = toupper( getche() );
+                music(250,100);
+                dice=((rand()%6)+1);//dice generator
+                system("cls");
+                PlayerXMovement(array, dice, &x, &row1,&pause1);//refer to the function
+                if (array[3][64]=='X'){
+                    printf("\nYou Win!! CONGRATULATION!!\n\nLoading......\nPlease wait......");
+                    Sleep(3000);
+                    loader();
+                    break;//to break out the "while game" loop and go back to main function
+                }
+                }else{
+                    pause1--;
+                }
+                }
+                break;
+        default:printf("\n\n\tINVALID CHOICE !!");
+                Sleep(800);
+                loader();
+                break;
         }
-        }else{
-            pause1--;
-        }
-        if (pause2<=0){//to perform the pause instruction for player O
-        Sleep(800);
-        dice=((rand()%6)+1);
-        system("cls");
-        PlayerOMovement(array, dice, &o, &Row1,&pause2);
-        if (array[3][66]=='O'){
-            Sleep(3000);
-            loader();
-            break;
-
-        }
-        }else{
-            pause2--;
-        }
-        }
-
          return 0;
 }
 
 int twoplayer()//2 players mode, the function is similar to single player
 {
+    loader();
     system("cls");
     int dice,game=1,x=1,o=3,row1=1,Row1=1,pause1=0,pause2=0;
     char array[21][71]=
@@ -1005,6 +1050,7 @@ int twoplayer()//2 players mode, the function is similar to single player
         system("cls");
         PlayerXMovement(array, dice, &x, &row1,&pause1);
         if (array[3][64]=='X'){
+            printf("\nPlayer X win !!\n\nLoading......\nPlease wait......");
             Sleep(3000);
             loader();
             break;
@@ -1021,6 +1067,7 @@ int twoplayer()//2 players mode, the function is similar to single player
         system("cls");
         PlayerOMovement(array, dice, &o, &Row1,&pause2);
         if (array[3][66]=='O'){
+            printf("\nPlayer O win !!\n\nLoading......\nPlease wait......");
             Sleep(3000);
             loader();
             break;
@@ -1036,6 +1083,7 @@ int twoplayer()//2 players mode, the function is similar to single player
 
 int multiplayer()//3 players mode
 {
+    loader();
     system("cls");
     int dice,game=1,x=1,row1=1,o=3,Row1=1,y=5,row=1,pause1=0,pause2=0,pause3=0;
     char array[21][71]=
@@ -1075,6 +1123,7 @@ int multiplayer()//3 players mode
         system("cls");
         PlayerXMovement(array, dice, &x, &row1,&pause1);
         if (array[3][64]=='X'){
+            printf("\nPlayer X win !!\n\nLoading......\nPlease wait......");
             Sleep(3000);
             loader();
             break;
@@ -1090,6 +1139,7 @@ int multiplayer()//3 players mode
         system("cls");
         PlayerOMovement(array, dice, &o, &Row1, &pause2);
         if (array[3][66]=='O'){
+            printf("\nPlayer O win !!\n\nLoading......\nPlease wait......");
             Sleep(3000);
             loader();
             break;
@@ -1105,6 +1155,7 @@ int multiplayer()//3 players mode
         system("cls");
         PlayerYMovement(array, dice, &y, &row, &pause3);
         if (array[3][68]=='Y'){
+            printf("\nPlayer Y win !!\n\nLoading......\nPlease wait......");
             Sleep(3000);
             loader();
             break;
@@ -1117,7 +1168,7 @@ int multiplayer()//3 players mode
          return 0;
 }
 
-void main()//main function
+int main()//main function
 {
 
     firstscr();//display starting interface
@@ -1147,6 +1198,7 @@ void main()//main function
             default:printf("\n\n\tINVALID CHOICE !!");Sleep(500);break;
             }
         }while(input>=0);
+        return 0;
 }
 
 
