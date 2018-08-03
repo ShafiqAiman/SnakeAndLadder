@@ -91,6 +91,7 @@ void quit()//quit option interface
             Sleep(500);
             system("cls");
             printf("\n\n\tWELCOME BACK !!");
+            music(1350,70);
             main();
         }else{
             printf("\n\n\tINVALID CHOICE !!");
@@ -128,7 +129,7 @@ void displayBoard(char array[21][71])//to display the original board by using 2d
 
     int counter,counter1;
     for (counter=0;counter<=20;counter++){//counter is for row
-                music(375,175); //audio for board printing
+    music(375,175); //audio for board printing
             for (counter1=0;counter1<=70;counter1++){//counter1 is for column
 
                 printf("%c",array[counter][counter1]);
@@ -158,8 +159,10 @@ void PlayerXMovement(char array[21][71], int dice,int *x, int *row1,int *pause){
 
 
     for (counter2=dice;counter2>0;counter2--){//counter2 is to know how many time the player will move by 1 step
-            music(1350,50);
+
             printf("\nPlayer X dice  : %d\n",dice);
+            colors(10);
+            music(1350,50);
             if ((*row1==1)||(*row1==3)||(*row1==5)){//the condition are separated into 2 parts starting from most bottom row of the board as row=1
             a=*x;//variable a is for printing space bar
             *x+=7;//variable x is for printing player symbol
@@ -178,7 +181,6 @@ void PlayerXMovement(char array[21][71], int dice,int *x, int *row1,int *pause){
                     if ((counter==19)&&(counter1==*x)){
                         array[counter][*x]='X';
                     }
-                colors(11);
                 printf("%c",array[counter][counter1]);
             }
             printf("\n");
