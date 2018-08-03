@@ -6,6 +6,7 @@ Name     :1.Muhammad Shafiq Aiman Bin Shahrul Nizam(B04180002)
           5.Aiman Syakirin Basri (B04180049)
 Title    :Group Assignment -- Snake And Ladder
 
+Group    : Group 1
 Date     :1 August 2018
 Lecturer :Sir Mohd Ridzuan Ahmad
 */
